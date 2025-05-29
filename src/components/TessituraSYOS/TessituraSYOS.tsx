@@ -32,6 +32,7 @@ import {
   useGetSeatsFromTessitura,
 } from "../../utils/useGetSeatsFromTessitura";
 import { useViewFromSeat } from "../../utils/useViewFromSeat";
+import { getNiceColor } from "../../utils/getNiceColor";
 
 type TessituraDataStore = {
   zoneAvailability: unknown;
@@ -46,6 +47,9 @@ export const TessituraSYOS = ({
   facilityId,
   svg,
   viewFromSeat,
+  constituentId,
+  modeOfSaleId,
+  sourceId,
 }: TessituraSYOSProps) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedSeatIds, setSelectedSeatIds] = useState<number[]>([]);
@@ -55,7 +59,9 @@ export const TessituraSYOS = ({
   } | null>(null);
   const { data: tessituraSeats, loading } = useGetSeatsFromTessitura(
     endpoint,
-    performanceId
+    performanceId,
+    constituentId,
+    modeOfSaleId
   );
   const { seatImages } = useViewFromSeat(viewFromSeat);
   const [imageLoading, setImageLoading] = useState(true);
@@ -72,8 +78,16 @@ export const TessituraSYOS = ({
         const performanceIdString = performanceId.toString();
         const fetchPromises = [
           tessituraClient.getZoneAvailability(performanceIdString),
-          tessituraClient.getPerformancePriceTypes(performanceIdString),
-          tessituraClient.getPriceTypeDetails(performanceIdString),
+          tessituraClient.getPerformancePriceTypes(
+            performanceIdString,
+            modeOfSaleId,
+            sourceId
+          ),
+          tessituraClient.getPriceTypeDetails(
+            performanceIdString,
+            modeOfSaleId,
+            sourceId
+          ),
           tessituraClient.getFacilityScreens(facilityId.toString()),
         ];
 
@@ -311,6 +325,21 @@ export const TessituraSYOS = ({
     return seats;
   }, [tessituraSeats]);
 
+  const displayGroupMapping = useMemo(() => {
+    if (loading || !tessituraSeats) {
+      return {};
+    }
+    const displayGroupMapping = seatData.reduce((acc, seat) => {
+      const displayGroup = seat.displayGroup;
+      if (displayGroup && !acc[displayGroup]) {
+        acc[displayGroup] = getNiceColor(Object.keys(acc).length);
+      }
+      return acc;
+    }, {} as Record<string, string>);
+
+    return displayGroupMapping;
+  }, [tessituraSeats]);
+
   const theme = createTheme({});
 
   return (
@@ -321,12 +350,7 @@ export const TessituraSYOS = ({
         seats={!loading ? seatData : []}
         selectedSeatIds={selectedSeatIds}
         onClick={handleClick}
-        displayGroupMapping={{
-          "1": "#f8d376",
-          "2": "#ef857d",
-          "3": "#5a8ef7",
-          "4": "#61d4a4",
-        }}
+        displayGroupMapping={displayGroupMapping}
       />
       <Modal
         title={modalTitle()}

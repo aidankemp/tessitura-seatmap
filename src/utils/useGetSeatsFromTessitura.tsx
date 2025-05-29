@@ -4,7 +4,9 @@ import { TessituraSeat } from "../types/tessituraClient.types";
 
 export const useGetSeatsFromTessitura = (
   endpoint: string,
-  performanceId: number
+  performanceId: number,
+  constituentId?: number,
+  modeOfSaleId?: number
 ) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +19,7 @@ export const useGetSeatsFromTessitura = (
       try {
         console.log("Fetching data...");
         const response = await fetch(
-          `${endpoint}/TXN/Performances/${performanceId}/Seats?constituentId=0&modeOfSaleId=19&performanceId=${performanceId}`
+          `${endpoint}/TXN/Performances/${performanceId}/Seats?constituentId=${constituentId}&modeOfSaleId=${modeOfSaleId}&performanceId=${performanceId}`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch data");
@@ -41,7 +43,7 @@ export const useGetSeatsFromTessitura = (
       setTessituraSeatData(seats);
       setLoading(false);
     });
-  }, [endpoint, performanceId]);
+  }, [constituentId, endpoint, modeOfSaleId, performanceId]);
 
   return { loading, data: tessituraSeatData, error };
 };

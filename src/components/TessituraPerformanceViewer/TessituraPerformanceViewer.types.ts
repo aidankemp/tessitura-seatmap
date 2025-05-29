@@ -3,4 +3,6 @@ export interface TessituraPerformanceViewerProps {
   performanceId: number;
   svg: string;
   viewFromSeat?: string;
+  constituentId?: number;
+  modeOfSaleId?: number;
 }

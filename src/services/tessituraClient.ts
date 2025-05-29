@@ -18,8 +18,8 @@ export class TessituraClient {
 
   getPerformanceSeats = async (
     performanceId: string,
-    constituentId?: string,
-    modeOfSaleId?: string
+    constituentId?: number,
+    modeOfSaleId?: number
   ) => {
     return this.#fetch(
       `TXN/Performances/${performanceId}/Seats?constituentId=${constituentId}&modeOfSaleId=${modeOfSaleId}&performanceId=${performanceId}`
@@ -34,8 +34,8 @@ export class TessituraClient {
 
   getPerformancePriceTypes = async (
     performanceId: string,
-    modeOfSaleId?: string,
-    sourceId?: string
+    modeOfSaleId?: number,
+    sourceId?: number
   ) => {
     return this.#fetch(
       `TXN/Performances/Prices?modeOfSaleId=${modeOfSaleId}&performanceIds=${performanceId}&sourceId=${sourceId}`
@@ -44,8 +44,8 @@ export class TessituraClient {
 
   getPriceTypeDetails = async (
     performanceId: string,
-    modeOfSaleId?: string,
-    sourceId?: string
+    modeOfSaleId?: number,
+    sourceId?: number
   ) => {
     return this.#fetch(
       `TXN/PriceTypes/Details?modeOfSaleId=${modeOfSaleId}&performanceIds=${performanceId}&sourceId=${sourceId}`

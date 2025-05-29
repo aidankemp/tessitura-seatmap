@@ -10,6 +10,7 @@ import "@mantine/notifications/styles.css";
 
 import { TessituraSeat } from "../../types/tessituraClient.types";
 import { TessituraClient } from "../../services/tessituraClient";
+import { getNiceColor } from "../../utils/getNiceColor";
 
 type SeatTabs =
   | "allocations"
@@ -24,6 +25,8 @@ export const TessituraPerformanceViewer = ({
   endpoint,
   performanceId,
   svg,
+  constituentId,
+  modeOfSaleId,
 }: TessituraPerformanceViewerProps) => {
   const [, setCurrentSeatId] = useState<number | null>(null);
 
@@ -52,7 +55,9 @@ export const TessituraPerformanceViewer = ({
         const tessituraClient = new TessituraClient(endpoint);
         const performanceIdString = performanceId.toString();
         const seats = await tessituraClient.getPerformanceSeats(
-          performanceIdString
+          performanceIdString,
+          constituentId,
+          modeOfSaleId
         );
         setLoading(false);
         return seats;
@@ -114,53 +119,7 @@ export const TessituraPerformanceViewer = ({
       setSeatAndGroupData(seats);
       console.log("Finished fetching data");
     });
-  }, [endpoint, performanceId]);
-
-  const getNiceColor = (index: number) => {
-    const colors = [
-      "#5a8ef7",
-      "#de5472",
-      "#9b98e5",
-      "#f8d376",
-      "#e89171",
-      "#72a588",
-      "#abd0f1",
-      "#61d4a4",
-      "#f7b7a3",
-      "#b5ead7",
-      "#ffdac1",
-      "#c7ceea",
-      "#ffb7b2",
-      "#b2f7ef",
-      "#f6abb6",
-      "#b5ead7",
-      "#c9cba3",
-      "#ffe156",
-      "#6a0572",
-      "#ab83a1",
-      "#f67280",
-      "#355c7d",
-      "#99b898",
-      "#f8b195",
-      "#f6cd61",
-      "#3ec300",
-      "#f9d423",
-      "#e27d60",
-      "#85dcb0",
-      "#e8a87c",
-      "#c38d9e",
-      "#41b3a3",
-      "#f38181",
-      "#a8e063",
-      "#f7cac9",
-      "#92a8d1",
-      "#f9b7b7",
-      "#b8a9c9",
-      "#ffb347",
-      "#b2d7e4",
-    ];
-    return colors[index % colors.length];
-  };
+  }, [constituentId, endpoint, modeOfSaleId, performanceId, seatTabs]);
 
   const { seatData, displayGroupMapping } = useMemo(() => {
     const seatData = seatAndGroups[selectedTab || "allocations"]?.seats || [];

@@ -41,13 +41,13 @@ export const tessituraApiMockHandlers = [
     return HttpResponse.json(ScreenData);
   }),
   http.get("https://sample-endpoint.com/Amazing-Venue_seat-*", async () => {
-    await delay(1000);
     return HttpResponse.json(
       {},
       {
         status: 301,
         headers: {
-          location: "http://localhost:6006/seat_view_cropped.jpeg",
+          location:
+            "https://images.unsplash.com/photo-1519683109079-d5f539e1542f",
         },
       }
     );

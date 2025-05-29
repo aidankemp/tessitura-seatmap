@@ -6,26 +6,24 @@
   }
 
   .view-from-seat {
+    display: flex;
+    justify-content: center;
+
     &__image {
       width: 100%;
-      max-width: 80vw;
+      height: 100%;
       border-radius: 0.5rem;
       object-fit: cover;
-
-      @media screen and (width >= 992px) {
-        max-width: none;
-        height: 350px;
-      }
     }
 
     &__skeleton {
-      width: 50vw;
-      height: 30vh;
       margin-bottom: 15px;
+      max-width: min(600px, 50vw);
+      max-height: 40vh;
 
-      @media screen and (width >= 992px) {
-        width: 500px;
-        height: 350px;
+      &:where([data-visible]) {
+        width: min(600px, 50vw);
+        height: min(30vw, 30vh);
       }
     }
   }

@@ -245,7 +245,6 @@ export const TessituraSYOS = ({
                   visible={imageLoading}
                   className="view-from-seat__skeleton"
                 >
-                  {" "}
                   <img
                     src={seatImageUrl}
                     alt={`View from seat ${currentSeat.id}`}

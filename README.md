@@ -2,7 +2,9 @@
 
 [![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://main--6838505ddf319835cf794a26.chromatic.com) [![NPM Version](https://img.shields.io/npm/v/tessitura-seatmap)](https://www.npmjs.com/package/tessitura-seatmap)
 
-Tessitura-integrated seatmap component, built with React and Mantine.
+Tessitura-integrated seatmap component that can be customized for any transaction path.
+
+Built with React, [Mantine UI](https://mantine.dev/), and [react-svg-seatmap](https://www.npmjs.com/package/react-svg-seatmap)
 
 This package includes:
 

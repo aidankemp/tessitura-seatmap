@@ -1,5 +1,7 @@
 # tessitura-seatmap
 
+[![Storybook](https://cdn.jsdelivr.net/gh/storybookjs/brand@main/badge/badge-storybook.svg)](https://main--6838505ddf319835cf794a26.chromatic.com) [![NPM Version](https://img.shields.io/npm/v/tessitura-seatmap)](https://www.npmjs.com/package/tessitura-seatmap)
+
 Tessitura-integrated seatmap component, built with React and Mantine.
 
 This package includes:
@@ -12,6 +14,8 @@ This package includes:
 - `TessituraPerformanceViewer`: View each layer of a performance's seatmap using live data, including availability, zone groups, and hold codes
 
 ![TessituraPerformanceViewer-Demo](https://github.com/user-attachments/assets/5a194de0-e76c-4f75-af1d-f75bed4c5cb6)
+
+Check it out here: [Storybook](https://main--6838505ddf319835cf794a26.chromatic.com)
 
 ## Installation
 

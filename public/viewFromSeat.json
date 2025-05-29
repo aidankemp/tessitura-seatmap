@@ -1,0 +1,10 @@
+{
+  "facilities": [
+    {
+      "facility_no": "1",
+      "seat_images": [
+        "https://sample-endpoint.com/Amazing-Venue_seat-1-A-1"
+        ]
+    }
+  ]
+}

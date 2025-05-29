@@ -1,17 +1,16 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TessituraPerformanceViewer } from "./TessituraPerformanceViewer";
+import { TessituraPerformanceViewer as TessituraPerformanceViewerComponent } from "./TessituraPerformanceViewer";
 import { tessituraApiMockHandlers } from "../../fixtures/tessituraApiMockHandlers";
 
 const meta = {
   title: "TessituraPerformanceViewer",
-  component: TessituraPerformanceViewer,
-  tags: ["autodocs"],
-} satisfies Meta<typeof TessituraPerformanceViewer>;
+  component: TessituraPerformanceViewerComponent,
+} satisfies Meta<typeof TessituraPerformanceViewerComponent>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const PerformanceViewer: Story = {
+export const TessituraPerformanceViewer: Story = {
   args: {
     endpoint: "https://sample-endpoint.com",
     svg: "amazing-venue.svg",

@@ -1,6 +1,6 @@
 {
   "name": "tessitura-seatmap",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "SYOS seatmap component for Tessitura, built with React and Mantine",
   "keywords": [
     "tessitura",

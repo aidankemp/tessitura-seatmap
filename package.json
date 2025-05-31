@@ -1,14 +1,18 @@
 {
   "name": "tessitura-seatmap",
   "version": "0.0.14",
-  "description": "SYOS seatmap component for Tessitura, built with React and Mantine",
+  "description": "Tessitura-integrated seatmap components, built with React and Mantine (includes SYOS).",
   "keywords": [
     "tessitura",
     "tessitura-seatmap",
     "react",
     "svg",
     "seatmap",
-    "svg-seatmap"
+    "svg-seatmap",
+    "syos",
+    "syos-seatmap",
+    "seatmap-component",
+    "seatmap-react"
   ],
   "private": false,
   "author": {

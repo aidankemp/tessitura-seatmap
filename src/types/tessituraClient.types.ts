@@ -90,3 +90,19 @@ export type PriceTypeDetails = {
 };
 
 export type getPriceTypeDetailsResponse = PriceTypeDetails[];
+
+export type PerformanceDetails = {
+  Id: number;
+  Date: string;
+  Description: string;
+  Facility: {
+    Description: string;
+    Id: number;
+    SeatMap: {
+      Description: string;
+      Id: number;
+    };
+  };
+};
+
+export type getPerformanceDetailsResponse = PerformanceDetails;

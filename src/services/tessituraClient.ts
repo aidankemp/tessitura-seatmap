@@ -16,6 +16,10 @@ export class TessituraClient {
     return response.json();
   };
 
+  getPerformanceDetails = async (performanceId: string) => {
+    return this.#fetch(`TXN/Performances/${performanceId}`);
+  };
+
   getPerformanceSeats = async (
     performanceId: string,
     constituentId?: number,

@@ -25,6 +25,7 @@ import {
   getPerformancePriceTypesResponse,
   getPriceTypeDetailsResponse,
   PerformancePriceType,
+  getPerformanceDetailsResponse,
 } from "../../types/tessituraClient.types";
 import { TessituraClient } from "../../services/tessituraClient";
 import {
@@ -33,9 +34,11 @@ import {
 } from "../../utils/useGetSeatsFromTessitura";
 import { useViewFromSeat } from "../../utils/useViewFromSeat";
 import { getNiceColor } from "../../utils/getNiceColor";
+import { PerformanceDetailDialog } from "./PerformanceDetailDialog";
 
 type TessituraDataStore = {
-  zoneAvailability: unknown;
+  performanceDetails: getPerformanceDetailsResponse;
+  zoneAvailability: unknown; // TODO: Replace with actual type
   performancePrices: getPerformancePriceTypesResponse;
   priceTypeDetails: getPriceTypeDetailsResponse;
   facilityScreens: getFacilityScreensResponse;
@@ -77,6 +80,7 @@ export const TessituraSYOS = ({
         const tessituraClient = new TessituraClient(endpoint);
         const performanceIdString = performanceId.toString();
         const fetchPromises = [
+          tessituraClient.getPerformanceDetails(performanceIdString),
           tessituraClient.getZoneAvailability(performanceIdString),
           tessituraClient.getPerformancePriceTypes(
             performanceIdString,
@@ -93,12 +97,14 @@ export const TessituraSYOS = ({
 
         Promise.all(fetchPromises).then(
           ([
+            performanceDetails,
             zoneAvailability,
             performancePrices,
             priceTypeDetails,
             facilityScreens,
           ]) => {
             setTessituraDataStore({
+              performanceDetails,
               zoneAvailability,
               performancePrices,
               priceTypeDetails,
@@ -340,7 +346,15 @@ export const TessituraSYOS = ({
     return displayGroupMapping;
   }, [tessituraSeats]);
 
-  const theme = createTheme({});
+  const theme = createTheme({
+    headings: {
+      sizes: {
+        h3: {
+          fontWeight: "normal",
+        },
+      },
+    },
+  });
 
   return (
     <MantineProvider theme={theme}>
@@ -351,6 +365,27 @@ export const TessituraSYOS = ({
         selectedSeatIds={selectedSeatIds}
         onClick={handleClick}
         displayGroupMapping={displayGroupMapping}
+        rightControls={[
+          <PerformanceDetailDialog
+            performanceName={
+              tessituraDataStore?.performanceDetails?.Description || "ERROR"
+            }
+            performanceDate={
+              (tessituraDataStore?.performanceDetails.Date
+                ? new Intl.DateTimeFormat("en-GB", {
+                    dateStyle: "full",
+                    timeStyle: "short",
+                    timeZone: "Australia/Sydney",
+                  }).format(
+                    new Date(tessituraDataStore?.performanceDetails.Date)
+                  )
+                : "") +
+              (" in " +
+                tessituraDataStore?.performanceDetails?.Facility.Description ||
+                "ERROR")
+            }
+          />,
+        ]}
       />
       <Modal
         title={modalTitle()}

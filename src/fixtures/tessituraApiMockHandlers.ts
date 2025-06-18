@@ -1,6 +1,7 @@
 import { http, HttpResponse, delay } from "msw";
 import { SeatData } from "./tessituraApiMockSeats";
 import {
+  PerformanceDetails,
   PriceData,
   PriceTypeData,
   ScreenData,
@@ -15,6 +16,10 @@ export const tessituraApiMockHandlers = [
       return HttpResponse.json(SeatData);
     }
   ),
+  http.get("https://sample-endpoint.com/TXN/Performances/1", async () => {
+    await delay(500);
+    return HttpResponse.json(PerformanceDetails);
+  }),
   http.get(
     "https://sample-endpoint.com/TXN/Performances/ZoneAvailabilities?performanceIds=1",
     async () => {

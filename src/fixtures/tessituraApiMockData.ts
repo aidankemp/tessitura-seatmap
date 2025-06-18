@@ -557,3 +557,17 @@ export const ScreenData = {
     },
   ],
 };
+
+export const PerformanceDetails = {
+  Id: 1,
+  Date: "2030-01-01T19:30:00Z",
+  Description: "One Fantastic Performance",
+  Facility: {
+    Description: "Amazing Venue",
+    Id: 101,
+    SeatMap: {
+      Description: "Amazing Cenue Seat Map",
+      Id: 201,
+    },
+  },
+};
